@@ -31,10 +31,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/index.html">
+                <a class="navbar-brand text-accent" href="/index.html">
                     <img src="/img/Cadence-Eva-mark-transparent.png" width="30" alt="Cadence Eva Mark">
-                    <!-- TO DO: Change name! -->
-                    App Name
+                    Fizz, B
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -47,15 +46,13 @@
                             <a class="nav-link text-accent" href="/index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <!-- TO DO: Change name! -->
                             <a class="nav-link text-accent" href="/app.html">The App</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-accent active" aria-current="page" href="/code.html">The Code</a>
                         </li>
                         <li class="nav-item">
-                            <!-- TO DO: Change to repo of app -->
-                            <a class="nav-link text-accent" href="https://github.com/eva-grimm">The Repo</a>
+                            <a class="nav-link text-accent" href="https://github.com/eva-grimm/FizzB">The Repo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-accent" href="https://cadence-eva.netlify.app/">About</a>
@@ -234,28 +231,27 @@
                     Once the function has initialized its variables, it begins a for-loop. The loop begins with an index
                     of 0 and works iteratively until the index is equal to the length of the passed array. The loop
                     begins by resetting the current HTML string to blank, wiping the slate clean from the previous
-                    iteration. It then initializes a variable as the current number, the value is set to the value of
-                    the array at the current index of the array. It then begins constructing the html to be passed to
-                    the website in three steps:
+                    iteration. It then initializes a variable as the current number set to the value of the array at the
+                    current index of the array. It then begins constructing the html to be passed to the website in
+                    three steps:
                 </p>
                 <ul>
                     <li>
                         <strong>Beginning a row:</strong> The function verifies whether the current number is one
-                        greater than a number divisible by 5 or otherwise the number 1. It does this by checking if the
-                        modulus of the current number is 1. If that is the case, then the function appends HTML code to
-                        the current string that begins a new row.
+                        greater than a number divisible by 5 or otherwise the number 1. If that is the case, then the
+                        function appends HTML code to the current string that begins a new row.
                     </li>
                     <li>
                         <strong>Checking the number:</strong> The function next checks whether the current number is
                         divisible by the fizz value, buzz value, or both. If any of these circumstances is met, the
                         function appends stylized HTML code to the string for the given case. If none of these
                         circumstances is met, then the function instead appends basic HTML code to the current string
-                        that represents the current number in the table.
+                        that represents the current number in the table with regular font.
                     </li>
                     <li>
                         <strong>Ending a row:</strong> The function finally checks whether the current number is
-                        divisible by 5 by checking whether the modulus of the current number is 0. If that is the case,
-                        the function appends HTML code to the current string that ends the current row.
+                        divisible by 5. If that is the case, the function appends HTML code to the current string that
+                        ends the current row.
                     </li>
                 </ul>
                 <p>
