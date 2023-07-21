@@ -9,7 +9,7 @@ function getValues() {
         // if we don't have numbers
         Swal.fire({
             title: 'Oops!',
-            text: 'Sorry, but 99 & 1 only works with real numbers',
+            text: 'Sorry, but Fizz, B only works with real numbers',
             icon: 'error',
             backdrop: false
         });
