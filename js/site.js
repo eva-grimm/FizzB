@@ -1,82 +1,93 @@
-// Gets the numbers from the start/end value input fields
+// Gets the numbers from the value input fields
 function getValues() {
     // get the values from the form and attempt to convert string to number
-    let startNumber = Number(document.getElementById('start-value').value);
-    let endNumber = Number(document.getElementById('end-value').value);
+    let fizzNumber = Number(document.getElementById('fizz-value').value);
+    let buzzNumber = Number(document.getElementById('buzz-value').value);
+    let stopNumber = Number(document.getElementById('stop-value').value);
 
     // validation
-    if (isNaN(startNumber) == true || isNaN(endNumber) == true ) { 
+    if (isNaN(fizzNumber) == true || isNaN(buzzNumber) == true || isNaN(stopNumber) == true) {
         // if we don't have numbers
         Swal.fire({
             title: 'Oops!',
-            text: 'Sorry, but Fizz, B only works with real numbers',
+            text: 'Sorry, but \'Fizz, B\' only works with real numbers',
             icon: 'error',
             backdrop: false
         });
-    } else if (startNumber > endNumber) {
-        // if we have a starting number greater than the ending number 
+    } else if (stopNumber < 1) {
+        // if we have a stop value less than 1
         Swal.fire({
             title: 'Oops!',
-            text: 'The starting number must be less than the ending number',
+            text: 'Sorry, but no stop value less than 1',
             icon: 'error',
             backdrop: false
         });
-    } else if (endNumber > 100) {
-        // if we have a ending number greater than 100
+    } else if (stopNumber > 5000) {
+        // if we have a stop value greater than 5000
         Swal.fire({
             title: 'Oops!',
-            text: 'Sorry, but no ending number greater than 100',
+            text: 'Sorry, but no stop value greater than 5000',
             icon: 'error',
             backdrop: false
         });
     } else {
-        // create an array of the numbers in range
-        let range = generateNumbers(startNumber, endNumber);
+        // create an array of the numbers from 1 to stopNumber
+        let numbersToStyle = generateNumbers(stopNumber);
 
-        // display the numbers in range
-        displayNumbers(range);
+        // convert numbersToStyle into HTML and push it to the applet page
+        displayNumbers(fizzNumber, buzzNumber, numbersToStyle);
     }
 }
 
-// Creates every number in the chosen input range
-function generateNumbers(start, end) {
-    let range = [];
+function generateNumbers(stopNumber) {
+    let numbersToStyle = [];
 
-    // create an array including only the numbers in range
-    for (let number = start; number <= end; number++) {
-        range.push(number);
+    // create an array of numbers from 1 up to stopNumber
+    for (let i = 1; i <= stopNumber; i++) {
+        numbersToStyle.push(i);
     }
 
-    return range;
+    return numbersToStyle;
 }
 
 // Puts the numbers on the page
-function displayNumbers(numbersToDisplay) {
+function displayNumbers(fizz, buzz, numbersToStyle) {
     let tableHtml = '';
-    let tableRowHtml = '';
+    let currentHtmlString = '';
 
-    for (let i = 0; i < numbersToDisplay.length; i++) {
-        let currentNumber = numbersToDisplay[i];
+    for (let i = 0; i < numbersToStyle.length; i++) {
+        // wipe currentHtmlString clean
+        currentHtmlString = '';
+        // set currentNumber to the next number in the array
+        let currentNumber = numbersToStyle[i];
 
-        // if the current number is one greater than a number divisible by 5, 
-        // or is otherwise the number 1, then begin a new row
+        // if the currentNumber is one greater than a number divisible by 5 
+        // or otherwise the number 1, then begin a new row
         if (currentNumber % 5 == 1) {
-            tableRowHtml = `<tr>`;
+            currentHtmlString = `<tr>`;
         }
 
-        // if the current number is divisible by 2, then make it bold
-        if (currentNumber % 2 == 0) {
-            tableRowHtml = `<td><strong>${currentNumber}<strong></td>`
+        if (currentNumber % fizz == 0 && currentNumber % buzz == 0) {
+            // if currentNumber is divisible by fizz *AND* buzz
+            currentHtmlString += '<td class = fizz-buzz>Fizz, B!</td>'
+        } else if (currentNumber % fizz == 0) {
+            // if currentNumber is divisible by *ONLY* fizz
+            currentHtmlString += '<td class = fizz>Fizz</td>'
+        } else if (currentNumber % buzz == 0) {
+            // if currentNumber is divisible by *ONLY* buzz
+            currentHtmlString += '<td class = buzz>B</td>'
         } else {
-            tableRowHtml = `<td>${currentNumber}</td>`
+            // if currentNumber is divisible by *NEITHER* fizz nor buzz
+            currentHtmlString += `<td>${currentNumber}</td>`
         }
 
-        // if the current number is disivible by 5, then end the row
+        // if currentNumber is disivible by 5, then end the row
         if (currentNumber % 5 == 0) {
-            tableRowHtml += `</tr>`;
+            currentHtmlString += `</tr>`;
         }
 
-        tableHtml += tableRowHtml;
+        // append the string the loop's been building to tableHtml 
+        tableHtml += currentHtmlString;
     }
 
     document.getElementById('results').innerHTML = tableHtml;

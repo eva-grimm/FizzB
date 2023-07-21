@@ -76,85 +76,96 @@
                 <h2 class="border-bottom border-2 border-dark">The Code</h2>
                 <pre class="line-numbers">
                     <code class="language-js">
-                        // Gets the numbers from the start/end value input fields
+                        // Gets the numbers from the value input fields
                         function getValues() {
                             // get the values from the form and attempt to convert string to number
-                            let startNumber = Number(document.getElementById('start-value').value);
-                            let endNumber = Number(document.getElementById('end-value').value);
+                            let fizzNumber = Number(document.getElementById('fizz-value').value);
+                            let buzzNumber = Number(document.getElementById('buzz-value').value);
+                            let stopNumber = Number(document.getElementById('stop-value').value);
 
                             // validation
-                            if (isNaN(startNumber) == true || isNaN(endNumber) == true ) { 
+                            if (isNaN(fizzNumber) == true || isNaN(buzzNumber) == true || isNaN(stopNumber) == true) {
                                 // if we don't have numbers
                                 Swal.fire({
                                     title: 'Oops!',
-                                    text: 'Sorry, but Fizz, B only works with real numbers',
+                                    text: 'Sorry, but \'Fizz, B\' only works with real numbers',
                                     icon: 'error',
                                     backdrop: false
                                 });
-                            } else if (startNumber > endNumber) {
-                                // if we have a starting number greater than the ending number 
+                            } else if (stopNumber < 1) {
+                                // if we have a stop value less than 1
                                 Swal.fire({
                                     title: 'Oops!',
-                                    text: 'The starting number must be less than the ending number',
+                                    text: 'Sorry, but no stop value less than 1',
                                     icon: 'error',
                                     backdrop: false
                                 });
-                            } else if (endNumber > 100) {
-                                // if we have a ending number greater than 100
+                            } else if (stopNumber > 5000) {
+                                // if we have a stop value greater than 5000
                                 Swal.fire({
                                     title: 'Oops!',
-                                    text: 'Sorry, but no ending number greater than 100',
+                                    text: 'Sorry, but no stop value greater than 5000',
                                     icon: 'error',
                                     backdrop: false
                                 });
                             } else {
-                                // create an array of the numbers in range
-                                let range = generateNumbers(startNumber, endNumber);
+                                // create an array of the numbers from 1 to stopNumber
+                                let numbersToStyle = generateNumbers(stopNumber);
 
-                                // display the numbers in range
-                                displayNumbers(range);
+                                // convert numbersToStyle into HTML and push it to the applet page
+                                displayNumbers(fizzNumber, buzzNumber, numbersToStyle);
                             }
                         }
 
-                        // Creates every number in the chosen input range
-                        function generateNumbers(start, end) {
-                            let range = [];
+                        function generateNumbers(stopNumber) {
+                            let numbersToStyle = [];
 
-                            // create an array including only the numbers in range
-                            for (let number = start; number <= end; number++) {
-                                range.push(number);
+                            // create an array of numbers from 1 up to stopNumber
+                            for (let i = 1; i <= stopNumber; i++) {
+                                numbersToStyle.push(i);
                             }
 
-                            return range;
+                            return numbersToStyle;
                         }
 
                         // Puts the numbers on the page
-                        function displayNumbers(numbersToDisplay) {
+                        function displayNumbers(fizz, buzz, numbersToStyle) {
                             let tableHtml = '';
-                            let tableRowHtml = '';
+                            let currentHtmlString = '';
 
-                            for (let i = 0; i < numbersToDisplay.length; i++) {
-                                let currentNumber = numbersToDisplay[i];
+                            for (let i = 0; i < numbersToStyle.length; i++) {
+                                // wipe currentHtmlString clean
+                                currentHtmlString = '';
+                                // set currentNumber to the next number in the array
+                                let currentNumber = numbersToStyle[i];
 
-                                // if the current number is one greater than a number divisible by 5, 
-                                // or is otherwise the number 1, then begin a new row
+                                // if the currentNumber is one greater than a number divisible by 5 
+                                // or otherwise the number 1, then begin a new row
                                 if (currentNumber % 5 == 1) {
-                                    tableRowHtml = `&lt;tr>`;
+                                    currentHtmlString = `&lt;tr>`;
                                 }
 
-                                // if the current number is divisible by 2, then make it bold
-                                if (currentNumber % 2 == 0) {
-                                    tableRowHtml = `&lt;td>&lt;strong>${currentNumber}&lt;strong>&lt;/td>`
+                                if (currentNumber % fizz == 0 && currentNumber % buzz == 0) {
+                                    // if currentNumber is divisible by fizz *AND* buzz
+                                    currentHtmlString += '&lt;td class = fizz-buzz>Fizz, B!&lt;/td>'
+                                } else if (currentNumber % fizz == 0) {
+                                    // if currentNumber is divisible by *ONLY* fizz
+                                    currentHtmlString += '&lt;td class = fizz>Fizz&lt;/td>'
+                                } else if (currentNumber % buzz == 0) {
+                                    // if currentNumber is divisible by *ONLY* buzz
+                                    currentHtmlString += '&lt;td class = buzz>B&lt;/td>'
                                 } else {
-                                    tableRowHtml = `&lt;td>${currentNumber}&lt;/td>`
+                                    // if currentNumber is divisible by *NEITHER* fizz nor buzz
+                                    currentHtmlString += `&lt;td>${currentNumber}&lt;/td>`
                                 }
 
-                                // if the current number is disivible by 5, then end the row
+                                // if currentNumber is disivible by 5, then end the row
                                 if (currentNumber % 5 == 0) {
-                                    tableRowHtml += `&lt;/tr>`;
+                                    currentHtmlString += `&lt;/tr>`;
                                 }
 
-                                tableHtml += tableRowHtml;
+                                // append the string the loop's been building to tableHtml 
+                                tableHtml += currentHtmlString;
                             }
 
                             document.getElementById('results').innerHTML = tableHtml;
@@ -163,71 +174,95 @@
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in three functions</p>
+                <p>'Fizz, B' is structured in three functions.</p>
                 <h5>getValues</h5>
                 <p>
                     This function gets the values passed from the website form and attempts to convert them to numbers.
                     From there, it validates that the values are valid for running the rest of the function. There are
-                    four checks in total:</p>
+                    three checks in total:</p>
                 <ul>
                     <li>
                         <strong>Were numbers passed?</strong> Although the form is set to only allow numbers, some
-                        browsers may not
-                        respect that limitation, resulting in the user providing values that aren't numbers.
+                        browsers may not respect that limitation, resulting in the user providing values that aren't
+                        numbers.
                     </li>
                     <li>
-                        <strong>Is the starting number greater than the ending number?</strong> This applet is designed
-                        to provide the
-                        numbers in a range, and that means our starting number can't be greater than the ending number.
+                        <strong>Is the stop value less than the 1?</strong> This applet requires a stop value of at
+                        least 1, so we need to confirm the stop value is 1 or more.
                     </li>
                     <li>
-                        <strong>Is the starting number greater than 0? Is the ending number greater than 100?</strong>
-                        Although most browsers could handle far greater ranges than 100 numbers, this would lead to a
-                        results list that is unwieldy. To avoid this, the starting and ending numbers are capped at 1
-                        and 100 respectively.
+                        <strong>Is the stop value greater than 5,000?</strong> Because browsers can only handle so much
+                        calculation at once, I had to cap the stop value somewhere. The number 5,000 was selected
+                        arbitrarily but serves to give a wide range of choice for the user.
                     </li>
                 </ul>
                 <p>
                     Once these checks have been performed, the function then calls generateNumbers(), passing it the
-                    start and end values and receiving back an array. The function then passes that array on to
-                    displayNumbers().
+                    stop value and receiving back an array. The function then passes that array on to displayNumbers().
                 </p>
                 <h5>generateNumbers</h5>
                 <p>
-                    This function is the simplest but is no less integral. It receives a start number and end number as
-                    arguments and creates a blank array.
+                    This function is the simplest but is no less integral. It receives the stop value as an argument,
+                    creates a blank array, then uses a for-loop to fill that array with numbers. The loop sets its
+                    index to 1 and runs iteratively until the index is greater than the ending number. While running,
+                    the loop pushes the current index into the array, which ultimately results in an array filled with
+                    numbers beginning with 1 and increasing by steps of 1 until the stop value is reached. If the chosen
+                    stop value is 1, the loop will run only once, resulting in an array with a single value of 1.
                 </p>
                 <p>
-                    The function then uses a for-loop to fill that array with numbers. This for loop sets its index to
-                    the starting number and will run iteratively until the index is greater than the ending number.
-                    While running, the for-loop pushes the current index into the array, which will ultimately result in
-                    an array filled with numbers beginning with the start number and concluding with the end number.
-                </p>
-                <p>
-                    Once the array of numbers has been generated, it returns this array to getValues().
+                    Once the array has been generated, the function returns it to getValues().
                 </p>
                 <h5>displayNumbers</h5>
                 <p>
                     The final function of the applet, this function's purpose is to render the array into html to be
-                    displayed on the applet page. It receives an array as an argument and begins by initializing two
-                    variables with blank strings. These variables are a main string of HTML that will be passed to the
-                    applet page, and a current string of HTML that will be built up over the course of a for-loop
-                    depending on what the current number is and ultimately appended to the main HTML string at the end
-                    of the loop.
+                    displayed on the applet page while specially formatting select numbers in the array. It receives the
+                    fizz value, buzz value, and the array generated earlier as arguments and begins by initializing two
+                    variables as blank strings.
                 </p>
-                <p>
-                    Once the function has initialized its variables, it begins a for-loop. The loop begins with an index
-                    of 0 and works iteratively until the index is equal to the length of the array. The loop begins by
-                    initializing a variable as the current number, which is set to the current index of the array. It
-                    then begins constructing the html to be passed to the website in four steps:
                 <ul>
                     <li>
-                        <strong>Beginning a row:</strong> The function checks whether the modulus/remainder of the
-                        current is equal to 1. What this means practically is the function is checking if the current
-                        number is one greater than a number divisible by 5 or otherwise the number one. If that is the
-                        case, then it appends the HTML code to the string
+                        The first variable is the table HTML that will be ultimately be passed to the applet page to
+                        display.
+                    </li>
+                    <li>
+                        The second variable is the current string of HTML that will be built up over the course of the
+                        for-loop described below and which will be appended to the table HTML string at the conclusion
+                        of each instance of the loop.
                     </li>
                 </ul>
+                <p>
+                    Once the function has initialized its variables, it begins a for-loop. The loop begins with an index
+                    of 0 and works iteratively until the index is equal to the length of the passed array. The loop
+                    begins by resetting the current HTML string to blank, wiping the slate clean from the previous
+                    iteration. It then initializes a variable as the current number, the value is set to the value of
+                    the array at the current index of the array. It then begins constructing the html to be passed to
+                    the website in three steps:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Beginning a row:</strong> The function verifies whether the current number is one
+                        greater than a number divisible by 5 or otherwise the number 1. It does this by checking if the
+                        modulus of the current number is 1. If that is the case, then the function appends HTML code to
+                        the current string that begins a new row.
+                    </li>
+                    <li>
+                        <strong>Checking the number:</strong> The function next checks whether the current number is
+                        divisible by the fizz value, buzz value, or both. If any of these circumstances is met, the
+                        function appends stylized HTML code to the string for the given case. If none of these
+                        circumstances is met, then the function instead appends basic HTML code to the current string
+                        that represents the current number in the table.
+                    </li>
+                    <li>
+                        <strong>Ending a row:</strong> The function finally checks whether the current number is
+                        divisible by 5 by checking whether the modulus of the current number is 0. If that is the case,
+                        the function appends HTML code to the current string that ends the current row.
+                    </li>
+                </ul>
+                <p>
+                    Once the current string has been fully constructed, the for-loop concludes by appending the current
+                    string to the end of the table string. Once the loop has concluded (and therefore the table string
+                    is fully constructed), the function uses DOM manipulation to change the 'results' element on the
+                    applet page to match the table string.
                 </p>
             </div>
         </div>
@@ -262,7 +297,7 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-    <!-- Prisme JS -->
+    <!-- Prism JS -->
     <script src="/js/prism.js"></script>
     <script>
         Prism.plugins.NormalizeWhitespace.setDefaults({

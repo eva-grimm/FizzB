@@ -69,30 +69,43 @@
             <div class="col border-end border-2">
                 <h1>Fizz, B: A Coding Challenge</h1>
                 <p class="lead">
-                    This applet is a JavaScript coding challenge that focuses on loops. The object is to
-                    display the numbers from 0 to 100 with the even numbers in <strong>BOLD</strong>.
+                    This applet is a JavaScript coding challenge that focuses on loops. The object is to display the
+                    numbers in a specified range and replace and stylize all numbers in that range that are divisible by
+                    the specified divisors.
                 </p>
                 <h2 class="border-bottom border-2 mt-5">Instructions</h2>
                 <p>
-                    Enter a starting value and an ending value (the default is 1-100). Press the button, and the numbers
+                    Enter a 'Fizz' value, 'Buzz' value, and Stop Value (the defaults are 3, 5, and 100). Press the button, and the numbers
                     will appear on the page below in rows of 5.
                 </p>
+                <p>
+                    Limits to be aware of:
+                </p>
+                <ul>
+                    <li>Stop value may not be less than 1</li>
+                    <li>Stop value may not be greater than 5,000</li>
+                </ul>
             </div>
             <div class="col">
                 <h5>Enter Values:</h5>
-                <form id="values" action="#" class="row g-3">
-                    <div class="col-6">
-                        <label for="start-value" class="form-label">Start Value:</label>
-                        <input id="start-value" name="start-value" type="number" class="form-control"
-                            placeholder="Start Value" value="1" aria-label="Start Value">
+                <form id="values" action="#" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                    <div class="col">
+                        <label for="fizz-value" class="form-label">Fizz Value:</label>
+                        <input id="fizz-value" name="fizz-value" type="number" class="form-control"
+                            placeholder="Fizz Value" value="3" aria-label="Fizz Value">
                     </div>
-                    <div class="col-6">
-                        <label for="end-value" class="form-label">End Value:</label>
-                        <input id="end-value" name="end-value" type="number" class="form-control"
-                            placeholder="End Value" value="100" aria-label="End Value">
+                    <div class="col">
+                        <label for="buzz-value" class="form-label">Buzz Value:</label>
+                        <input id="buzz-value" name="buzz-value" type="number" class="form-control"
+                            placeholder="Buzz Value" value="5" aria-label="Buzz Value">
                     </div>
-                    <div class="col-12 text-end">
-                        <button id="btn-submit" type="button" class="btn btn-primary btn-lg" onclick="getValues()">
+                    <div class="col">
+                        <label for="stop-value" class="form-label">Stop Value:</label>
+                        <input id="stop-value" name="stop-value" type="number" class="form-control"
+                            placeholder="Stop Value" value="100" aria-label="Stop Value">
+                    </div>
+                    <div class="col d-flex align-items-end">
+                        <button id="btn-submit" type="button" class="btn btn-primary btn-lg mt-1" onclick="getValues()">
                             Let's go!
                         </button>
                     </div>
@@ -100,7 +113,7 @@
                 <div class="card p-1 mt-3">
                     <h2 class="border-bottom border-2 m-3">Results</h2>
                     <div class="table-responsive">
-                        <table class="table table-striped table-sm p-1">
+                        <table class="table table-sm text-center p-1">
                             <tbody id="results">
                                 <!-- Results will print here -->
                             </tbody>
@@ -108,7 +121,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -146,10 +158,6 @@
 
     <!-- Custom JS -->
     <script src="/js/site.js"></script>
-
-    <script>
-
-    </script>
 
 </body>
 
