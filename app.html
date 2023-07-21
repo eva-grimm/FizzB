@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <!-- TO DO: Change name! -->
-    <title>App Name</title>
+    <title>99 & 1</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -31,7 +31,7 @@
                 <a class="navbar-brand" href="/index.html">
                     <img src="/img/Cadence-Eva-mark-transparent.png" width="30" alt="Cadence Eva Mark">
                     <!-- TO DO: Change name! -->
-                    App Name
+                    99 & 1
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -68,9 +68,51 @@
     </header>
 
     <main class="container py-3">
-        <h1>APP UI GOES HERE</h1>
-        <input id="message" type="text" class="form-control" placeholder="Enter a message">
-        <button id="btn-submit" type="button" class="btn btn-primary my-3" onclick="displayMessage()">Display Message</button>
+        <div class="row row-cols-1 row-cols-md-2 gy-2">
+            <div class="col border-end border-2">
+                <h1>99 & 1: A Coding Challenge</h1>
+                <p class="lead">
+                    This applet is a JavaScript coding challenge that focuses on loops. The object is to
+                    display the numbers from 0 to 100 with the even numbers in <strong>BOLD</strong>.
+                </p>
+                <h2 class="border-bottom border-2 mt-5">Instructions</h2>
+                <p>
+                    Enter a starting value and an ending value (the default is 1-100). Press the button, and the numbers
+                    will appear on the page below in rows of 5.
+                </p>
+            </div>
+            <div class="col">
+                <h5>Enter Values:</h5>
+                <form id="values" action="#" class="row g-3">
+                    <div class="col-6">
+                        <label for="start-value" class="form-label">Start Value:</label>
+                        <input id="start-value" name="start-value" type="number" class="form-control"
+                            placeholder="Start Value" value="1" aria-label="Start Value">
+                    </div>
+                    <div class="col-6">
+                        <label for="end-value" class="form-label">End Value:</label>
+                        <input id="end-value" name="end-value" type="number" class="form-control"
+                            placeholder="End Value" value="100" aria-label="End Value">
+                    </div>
+                    <div class="col-12 text-end">
+                        <button id="btn-submit" type="button" class="btn btn-primary btn-lg" onclick="getValues()">
+                            Let's go!
+                        </button>
+                    </div>
+                </form>
+                <div class="card p-1 mt-3">
+                    <h2 class="border-bottom border-2 m-3">Results</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm p-1">
+                            <tbody id="results">
+                                <!-- Results will print here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <footer class="footer container-fluid py-3">
@@ -104,13 +146,14 @@
 
     <!-- Sweet Alerts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <!-- Custom JS -->
     <script src="/js/site.js"></script>
 
     <script>
-        document.getElementById('btn-submit').addEventListener('click', displayMessage);
+
     </script>
+    
 </body>
 
 </html>
