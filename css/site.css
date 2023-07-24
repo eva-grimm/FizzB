@@ -99,7 +99,7 @@ body {
     color: var(--ce-accent-300)
 }
 
-.fizz-buzz {
+.fizzbuzz {
     background-color: var(--ce-accent-200) !important;
 }
 

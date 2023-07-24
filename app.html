@@ -74,7 +74,8 @@
                 </p>
                 <h2 class="border-bottom border-2 mt-5">Instructions</h2>
                 <p>
-                    Enter a 'Fizz' value, 'Buzz' value, and Stop Value (the defaults are 3, 5, and 100). Press the button, and the numbers
+                    Enter a 'Fizz' value, 'Buzz' value, and Stop Value (the defaults are 3, 5, and 100). Press the
+                    button, and the numbers
                     will appear on the page below in rows of 5.
                 </p>
                 <p>
@@ -107,7 +108,7 @@
                     <div class="col">
                         <label for="end-value" class="form-label">End Value:</label>
                         <input id="end-value" name="end-value" type="number" class="form-control"
-                            placeholder="end Value" value="15" aria-label="End Value">
+                            placeholder="end Value" value="100" aria-label="End Value">
                     </div>
                     <div class="col d-flex align-items-end">
                         <button id="btn-submit" type="button" class="btn btn-primary btn-lg mt-1" onclick="getValues()">
@@ -115,14 +116,10 @@
                         </button>
                     </div>
                 </form>
-                <div class="card p-1 mt-3">
+                <div class="p-1 mt-3">
                     <h2 class="border-bottom border-2 m-3">Results</h2>
-                    <div class="table-responsive">
-                        <table class="table table-sm text-center p-1">
-                            <tbody id="results">
-                                <!-- Results will print here -->
-                            </tbody>
-                        </table>
+                    <div id="results" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 text-center p-3">
+                        <!-- Results will print here -->
                     </div>
                 </div>
             </div>
