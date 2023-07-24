@@ -81,13 +81,14 @@
                     Limits to be aware of:
                 </p>
                 <ul>
-                    <li>Stop value may not be less than 1</li>
-                    <li>Stop value may not be greater than 5,000</li>
+                    <li>Start value must be greater than 0.</li>
+                    <li>Stop value must be 5,000 or less.</li>
+                    <li>Start value must not be more than the end value.</li>
                 </ul>
             </div>
             <div class="col">
                 <h5>Enter Values:</h5>
-                <form id="values" action="#" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                <form id="values" action="#" class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
                     <div class="col">
                         <label for="fizz-value" class="form-label">Fizz Value:</label>
                         <input id="fizz-value" name="fizz-value" type="number" class="form-control"
@@ -99,9 +100,14 @@
                             placeholder="Buzz Value" value="5" aria-label="Buzz Value">
                     </div>
                     <div class="col">
-                        <label for="stop-value" class="form-label">Stop Value:</label>
-                        <input id="stop-value" name="stop-value" type="number" class="form-control"
-                            placeholder="Stop Value" value="100" aria-label="Stop Value">
+                        <label for="start-value" class="form-label">Start Value:</label>
+                        <input id="start-value" name="start-value" type="number" class="form-control"
+                            placeholder="start Value" value="1" aria-label="Start Value">
+                    </div>
+                    <div class="col">
+                        <label for="end-value" class="form-label">End Value:</label>
+                        <input id="end-value" name="end-value" type="number" class="form-control"
+                            placeholder="end Value" value="15" aria-label="End Value">
                     </div>
                     <div class="col d-flex align-items-end">
                         <button id="btn-submit" type="button" class="btn btn-primary btn-lg mt-1" onclick="getValues()">
