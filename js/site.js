@@ -21,7 +21,7 @@ function getValues() {
     } else {
         Swal.fire({
             title: 'Oops!',
-            text: 'Sorry, but there\'s a problem with your inputs. \'Fizz, B\' only works with real numbers, start and end values greater than 0, a max end value of 5,000, and a start value that isn\'t greater than the end value',
+            text: 'Sorry, but there\'s a problem with your inputs. \'Fizz, B\' only works with real numbers, start and end values greater than 0, a max end value of 3,000, and a start value that isn\'t greater than the end value',
             icon: 'error',
             backdrop: false
         });

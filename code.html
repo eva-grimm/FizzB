@@ -88,15 +88,15 @@
                                 && Number.isInteger(end)
                                 && start > 0
                                 && end > 0
-                                && end &lt;= 5000
+                                && end &lt;= 3000
                                 && start &lt;= end) {
-                                let numbersToDisplay = NonRecursiveFizzB(fizz, buzz, start, end);
+                                let numbersToDisplay = FizzB(fizz, buzz, start, end);
 
                                 displayNumbers(numbersToDisplay);
                             } else {
                                 Swal.fire({
                                     title: 'Oops!',
-                                    text: 'Sorry, but there\'s a problem with your inputs. \'Fizz, B\' only works with real numbers, start and end values greater than 0, a max end value of 5,000, and a start value that isn\'t greater than the end value',
+                                    text: 'Sorry, but there\'s a problem with your inputs. \'Fizz, B\' only works with real numbers, start and end values greater than 0, a max end value of 3,000, and a start value that isn\'t greater than the end value',
                                     icon: 'error',
                                     backdrop: false
                                 });
