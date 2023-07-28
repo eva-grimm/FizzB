@@ -13,9 +13,9 @@ function getValues() {
         && Number.isInteger(end)
         && start > 0
         && end > 0
-        && end <= 5000
+        && end <= 3000
         && start <= end) {
-        let numbersToDisplay = NonRecursiveFizzB(fizz, buzz, start, end);
+        let numbersToDisplay = FizzB(fizz, buzz, start, end);
 
         displayNumbers(numbersToDisplay);
     } else {
